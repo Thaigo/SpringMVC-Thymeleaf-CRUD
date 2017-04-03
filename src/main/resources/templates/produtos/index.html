@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head"></head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Produtos</strong>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Descrição</th>							
+							<th>preço</th>
+							<th>Categoria</th>
+							<th>Açoes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${produtos}">
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.nome}"></td>
+							<td th:text="${p.descricao}"></td>							
+							<td th:text="${{p.preco}}"></td>
+							<td th:text="${p.categoria.nome}"></td>							
+							<td>
+								<div class="btn-group pull-center">									
+							   		<a class="btn btn-sm btn-primary" th:href="@{/produtos/edit/{id}(id=${p.id})}" >Editar</a>
+							   		<a class="delete btn btn-sm btn-danger" th:href="@{/produtos/delete/{id}(id=${p.id})}">Excluir</a>
+							   </div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<a class="btn btn-sm btn-success" th:href="@{/produtos/new/}" >Adicionar</a>
+		</div>
+	</div>
+	
+	<div>
+		<footer th:replace="layout :: site-footer" />
+	</div>
+	
+</body>
+</html>
